@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateInvoiceTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('invoice', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('Patient_Name')->unique();
+            $table->string('Title');
+            $table->longText('Description');
+            $table->string('Status');
+            $table->date('Date');
+            $table->double('Amount', 8, 2);
+            $table->rememberToken();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('invoice');
+    }
+}
